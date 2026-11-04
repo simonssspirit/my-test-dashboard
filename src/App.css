@@ -1,0 +1,90 @@
+.app-shell { display: flex; min-height: 100vh; }
+.sidebar { width: 230px; flex-shrink: 0; background: white; border-right: 1px solid #e8eaf1; padding: 32px 22px 24px; display: flex; flex-direction: column; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 23px; font-weight: 700; letter-spacing: -1px; }
+.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; color: white; background: #6255df; border-radius: 10px; }
+.nav-label { color: #626c80; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; margin: 48px 12px 16px; }
+nav { display: grid; gap: 6px; }
+.nav-link { padding: 12px 14px; border-radius: 8px; font-size: 14px; color: #626c80; }
+.nav-link:hover, .nav-link:focus-visible { background: #eeecfd; color: #6255df; }
+.workspace-note { margin-top: auto; padding: 64px 10px 24px; font-size: 12px; line-height: 1.8; color: #626c80; }
+.profile { display: flex; align-items: center; gap: 10px; padding-top: 20px; border-top: 1px solid #edf0f5; font-size: 12px; }
+.profile small { display: block; color: #626c80; margin-top: 4px; }
+.avatar { width: 38px; height: 38px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%; background: #eeecfd; color: #6255b9; font-size: 11px; font-weight: 700; }
+main { flex: 1; min-width: 0; }
+.topbar { height: 80px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #e8eaf1; background: white; font-size: 12px; color: #626c80; }
+.topbar strong { color: #353d50; font-weight: 500; }
+.badge { border: 1px solid #e3e5ee; border-radius: 20px; padding: 6px 10px; font-size: 11px; color: #626c80; white-space: nowrap; }
+.content { max-width: 1440px; padding: 36px 40px 24px; margin: auto; }
+.page-heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 28px; }
+.eyebrow { font-size: 10px; letter-spacing: 1.6px; color: #626c80; font-weight: 700; }
+.muted { color: #626c80; font-size: 13px; line-height: 1.7; }
+.toolbar { display: flex; gap: 10px; flex-shrink: 0; font-size: 12px; }
+.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.card { background: white; border: 1px solid #e6e9f1; border-radius: 12px; box-shadow: 0 2px 3px #20263602; }
+.metric { padding: 22px; }
+.metric h2 { font-size: 12px; color: #626c80; font-weight: 500; }
+.metric-value { font-size: 29px; font-weight: 700; letter-spacing: -1px; margin: 16px 0 12px; }
+.metric .muted { font-size: 11px; }
+.details-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 22px; margin: 24px 0; }
+.revenue { padding: 24px; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.section-heading .muted { margin-top: 4px; }
+.chart-legend { font-size: 11px; color: #626c80; }
+.chart-legend::before { content: ''; display: inline-block; width: 8px; height: 8px; background: #8275ef; border-radius: 3px; margin-right: 6px; }
+.chart { height: 220px; display: flex; gap: 14px; margin-top: 28px; }
+.chart-column { flex: 1; min-width: 0; text-align: center; font-size: 10px; color: #626c80; }
+.bar-track { height: 192px; display: flex; align-items: end; justify-content: center; border-bottom: 1px solid #edf0f5; background: repeating-linear-gradient(to top, transparent 0, transparent 47px, #f3f4f8 47px, #f3f4f8 48px); }
+.bar { width: 62%; max-width: 52px; border-radius: 5px 5px 0 0; background: #a298ef; }
+.chart-column:nth-last-child(2) .bar { background: #6255df; }
+.chart-column > span { display: block; margin-top: 12px; }
+.chart-note { font-size: 10px; line-height: 1.6; color: #626c80; margin-top: 18px; }
+.getting-started { padding: 26px; background: #f0edff; border-color: #e4dffb; display: flex; flex-direction: column; align-items: start; }
+.getting-started h2 { font-size: 26px; letter-spacing: -0.8px; margin: 20px 0 12px; }
+.getting-started p, .getting-started li { font-size: 12px; line-height: 1.9; color: #686184; }
+.getting-started ul { padding-left: 18px; margin: 18px 0 24px; }
+.getting-started a { color: #5846c3; font-size: 12px; font-weight: 700; margin-top: auto; }
+.getting-started a:hover { text-decoration: underline; }
+.activity { padding: 24px; }
+.activity-list { list-style: none; padding: 0; margin: 12px 0 0; }
+.activity-list li { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid #f0f1f6; }
+.activity-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.activity-person, .activity-amount { display: grid; gap: 6px; font-size: 12px; }
+.activity-person strong, .activity-amount strong { font-weight: 600; }
+.activity-person span, .activity-amount span { font-size: 11px; color: #626c80; }
+.activity-amount { margin-left: auto; text-align: right; }
+footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 24px; font-size: 10px; color: #626c80; line-height: 1.8; }
+
+@media (max-width: 1150px) {
+  .sidebar { width: 200px; padding-inline: 16px; }
+  .content { padding: 28px 24px; }
+  .topbar { padding-inline: 24px; }
+  .page-heading { align-items: start; flex-direction: column; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .app-shell { flex-direction: column; }
+  .sidebar { width: 100%; padding: 16px 20px; border-right: 0; border-bottom: 1px solid #e8eaf1; gap: 18px; }
+  .brand { font-size: 20px; }
+  .sidebar nav { display: flex; flex-wrap: wrap; gap: 4px; }
+  .nav-link { padding: 8px 12px; font-size: 12px; }
+  .nav-label, .workspace-note, .profile { display: none; }
+  .topbar { height: 60px; padding-inline: 20px; }
+  .content { padding: 28px 20px 20px; }
+  .details-grid { grid-template-columns: 1fr; }
+  .metrics { gap: 12px; }
+  .metric { padding: 18px 16px; }
+  .metric-value { font-size: 26px; }
+  .revenue, .activity, .getting-started { padding: 20px; }
+  .activity-person { min-width: 0; }
+  .activity-person span { line-height: 1.5; }
+  .activity-amount { flex-shrink: 0; }
+  footer { flex-direction: column; gap: 4px; }
+}
+
+@media (max-width: 380px) {
+  .toolbar { flex-wrap: wrap; }
+  .activity-list li { gap: 8px; }
+  .activity .avatar { display: none; }
+  .chart { gap: 6px; }
+}
