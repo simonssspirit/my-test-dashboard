@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import RevenueGrid from './RevenueGrid'
+import { loadRevenueData, saveRevenueData } from './revenueData'
+import type { ReportPeriod } from './revenueData'
 import './App.css'
 
 const reports = {
@@ -8,7 +11,6 @@ const reports = {
     orders: '186',
     customers: '124',
     conversion: '3.6%',
-    chart: [42, 64, 51, 82, 67, 94, 76],
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
   },
   month: {
@@ -17,7 +19,6 @@ const reports = {
     orders: '742',
     customers: '518',
     conversion: '3.8%',
-    chart: [54, 72, 65, 92],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
   },
 }
@@ -30,8 +31,19 @@ const activity = [
 ]
 
 function App() {
-  const [period, setPeriod] = useState<'week' | 'month'>('week')
+  const [period, setPeriod] = useState<ReportPeriod>('week')
+  const [revenueState, setRevenueState] = useState(loadRevenueData)
   const report = reports[period]
+  const chart = revenueState.data[period]
+
+  function updateRevenue(index: number, value: number) {
+    const data = {
+      ...revenueState.data,
+      [period]: chart.map((existing, row) => row === index ? value : existing),
+    }
+    setRevenueState({ data, storageFailed: !saveRevenueData(data) })
+  }
+
   const metrics = [
     { label: 'Total revenue', value: report.revenue },
     { label: 'Orders', value: report.orders },
@@ -65,6 +77,7 @@ function App() {
         <nav aria-label="Main navigation">
           <a className="nav-link" href="#overview">Overview</a>
           <a className="nav-link" href="#revenue">Revenue</a>
+          <a className="nav-link" href="#revenue-data">Revenue data</a>
           <a className="nav-link" href="#activity">Recent activity</a>
         </nav>
         <p className="workspace-note">Your next big idea starts here.</p>
@@ -102,15 +115,15 @@ function App() {
           <div className="details-grid">
             <section id="revenue" className="card revenue" aria-labelledby="revenue-title">
               <div className="section-heading"><div><h2 id="revenue-title">Revenue overview</h2><p className="muted">A little progress, every day.</p></div><span className="chart-legend">Revenue</span></div>
-              <div className="chart" role="img" aria-label={`${report.label} relative revenue: ${report.labels.map((label, index) => `${label}: ${report.chart[index]} out of 100`).join(',')}. Illustrative sample data.`}>
-                {report.chart.map((height, index) => (
+              <div className="chart" role="img" aria-label={`${report.label} relative revenue: ${report.labels.map((label, index) => `${label}: ${chart[index]} out of 100`).join(',')}. Illustrative sample data.`}>
+                {chart.map((height, index) => (
                   <div className="chart-column" key={report.labels[index]}>
                     <div className="bar-track"><div className="bar" style={{ height: `${height}%` }} /></div>
                     <span>{report.labels[index]}</span>
                   </div>
                 ))}
               </div>
-              <p className="chart-note">Relative revenue by period. Sample data, not live transactions.</p>
+              <p className="chart-note">Relative revenue by period, on a scale of 0 to 100. Edit the revenue data below to update this chart. Sample data, not live transactions.</p>
             </section>
             <section className="card getting-started" aria-labelledby="start-title">
               <span className="eyebrow">BUILT FOR WHAT&apos;S NEXT</span>
@@ -120,6 +133,14 @@ function App() {
               <a href="https://vite.dev/guide/" target="_blank" rel="noreferrer">Explore the Vite guide &rarr;</a>
             </section>
           </div>
+
+          <section id="revenue-data" className="card revenue-data" aria-labelledby="revenue-data-title">
+            <div className="section-heading"><div><h2 id="revenue-data-title">Revenue data</h2><p className="muted">{report.label}, shared with the revenue chart.</p></div><span className="badge">Editable sample data</span></div>
+            <RevenueGrid key={period} labels={report.labels} values={chart} onUpdate={updateRevenue} />
+            <p className={revenueState.storageFailed ? 'storage-status input-error' : 'storage-status muted'} role="status">
+              {revenueState.storageFailed ? 'Local storage is unavailable. Changes work in this tab but will not be saved after a reload.' : 'Valid changes are saved automatically in this browser. Summary cards are separate sample metrics.'}
+            </p>
+          </section>
 
           <section id="activity" className="card activity" aria-labelledby="activity-title">
             <div className="section-heading"><div><h2 id="activity-title">Recent activity</h2><p className="muted">The latest from your workspace.</p></div><span className="badge">Sample data</span></div>
